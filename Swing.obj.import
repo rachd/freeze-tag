@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Swing.obj-1cc9a7be2babb650dce3af95dfe34ab9.mesh"
+
+[deps]
+
+files=[ "res://.import/Swing.obj-1cc9a7be2babb650dce3af95dfe34ab9.mesh" ]
+
+source_file="res://Swing.obj"
+dest_files=[ "res://.import/Swing.obj-1cc9a7be2babb650dce3af95dfe34ab9.mesh", "res://.import/Swing.obj-1cc9a7be2babb650dce3af95dfe34ab9.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

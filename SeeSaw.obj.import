@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/SeeSaw.obj-71f692453fe4c798ed2dd29b35ea7157.mesh"
+
+[deps]
+
+files=[ "res://.import/SeeSaw.obj-71f692453fe4c798ed2dd29b35ea7157.mesh" ]
+
+source_file="res://SeeSaw.obj"
+dest_files=[ "res://.import/SeeSaw.obj-71f692453fe4c798ed2dd29b35ea7157.mesh", "res://.import/SeeSaw.obj-71f692453fe4c798ed2dd29b35ea7157.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
