@@ -42,6 +42,7 @@ func _physics_process(delta):
 	vel.y = 0
 	
 	vel = move_and_slide(vel, Vector3.UP)
+	
 
 func freeze():
 	if !is_frozen:
