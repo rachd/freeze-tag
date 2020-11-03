@@ -4,7 +4,7 @@ var moveSpeed = 10.0
 var vel = Vector3()
 var gravity = 15.0
 
-export var color = "#654234"
+var color = "#FFFF00"
 
 onready var camera = get_node("Camera Orbit")
 onready var raycast = get_node("RayCast")

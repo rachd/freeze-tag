@@ -1,0 +1,153 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MainMenu.gd" type="Script" id=1]
+
+[node name="MainMenu" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerPanel" type="PanelContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 56.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 49.0
+
+[node name="Label" type="Label" parent="PlayerPanel/VBoxContainer"]
+margin_right = 1010.0
+margin_bottom = 14.0
+text = "Player Name:"
+
+[node name="txtPlayerName" type="LineEdit" parent="PlayerPanel/VBoxContainer"]
+margin_top = 18.0
+margin_right = 1010.0
+margin_bottom = 42.0
+
+[node name="HostPanel" type="PanelContainer" parent="."]
+margin_top = 60.0
+margin_right = 1024.0
+margin_bottom = 186.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HostPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 119.0
+
+[node name="Label2" type="Label" parent="HostPanel/VBoxContainer"]
+margin_right = 1010.0
+margin_bottom = 14.0
+text = "Create Server"
+align = 1
+
+[node name="Label" type="Label" parent="HostPanel/VBoxContainer"]
+margin_top = 18.0
+margin_right = 1010.0
+margin_bottom = 32.0
+text = "Server Name:"
+
+[node name="txtServerName" type="LineEdit" parent="HostPanel/VBoxContainer"]
+margin_top = 36.0
+margin_right = 1010.0
+margin_bottom = 60.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HostPanel/VBoxContainer"]
+margin_top = 64.0
+margin_right = 1010.0
+margin_bottom = 88.0
+
+[node name="Label2" type="Label" parent="HostPanel/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 74.0
+margin_bottom = 19.0
+text = "Server Port:"
+
+[node name="txtServerPort" type="LineEdit" parent="HostPanel/VBoxContainer/HBoxContainer"]
+margin_left = 78.0
+margin_right = 136.0
+margin_bottom = 24.0
+text = "4546"
+
+[node name="Label3" type="Label" parent="HostPanel/VBoxContainer/HBoxContainer"]
+margin_left = 140.0
+margin_top = 5.0
+margin_right = 262.0
+margin_bottom = 19.0
+text = "Number of Players:"
+
+[node name="SpinBox" type="SpinBox" parent="HostPanel/VBoxContainer/HBoxContainer"]
+margin_left = 266.0
+margin_right = 340.0
+margin_bottom = 24.0
+min_value = 3.0
+max_value = 10.0
+value = 4.0
+
+[node name="CreateButton" type="Button" parent="HostPanel/VBoxContainer"]
+margin_top = 92.0
+margin_right = 53.0
+margin_bottom = 112.0
+size_flags_horizontal = 0
+text = "Create"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_top = 190.0
+margin_right = 1024.0
+margin_bottom = 270.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 73.0
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_right = 1010.0
+margin_bottom = 14.0
+text = "Join Server"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 1010.0
+margin_bottom = 42.0
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 13.0
+margin_bottom = 19.0
+text = "IP"
+
+[node name="txtJoinIP" type="LineEdit" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 17.0
+margin_right = 75.0
+margin_bottom = 24.0
+text = "127.0.0.1"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 79.0
+margin_top = 5.0
+margin_right = 105.0
+margin_bottom = 19.0
+text = "Port"
+
+[node name="textJoinPort" type="LineEdit" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 109.0
+margin_right = 167.0
+margin_bottom = 24.0
+text = "4546"
+
+[node name="JoinButton" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 35.0
+margin_bottom = 66.0
+size_flags_horizontal = 0
+text = "Join"
+[connection signal="pressed" from="HostPanel/VBoxContainer/CreateButton" to="." method="_on_CreateButton_pressed"]

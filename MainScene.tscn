@@ -501,11 +501,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
 
 [node name="Player3" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.587785, 0, 0.809017, 0, 1, 0, -0.809017, 0, 0.587785, 5, 0, 0 )
-color = "#AF3412"
 
 [node name="Player2" parent="." instance=ExtResource( 5 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, -6 )
-color = "#723452"
 
 [node name="ItPlayer" parent="." instance=ExtResource( 6 )]
-color = "#543778"

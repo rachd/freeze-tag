@@ -8,7 +8,7 @@ var moveSpeed = originalMoveSpeed
 var vel = Vector3()
 var is_frozen = false
 
-export var color = "#123456"
+var color = "#8BC1DE"
 
 onready var camera = get_node("Camera Orbit")
 

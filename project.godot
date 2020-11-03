@@ -19,6 +19,10 @@ config/name="FreezeTag"
 run/main_scene="res://MainScene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Network="*res://network.gd"
+
 [input]
 
 move_forwards={
