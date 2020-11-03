@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Roundabout.obj-c82c355cccb7bcf6d27dc7b9cecbcbcb.mesh"
+
+[deps]
+
+files=[ "res://.import/Roundabout.obj-c82c355cccb7bcf6d27dc7b9cecbcbcb.mesh" ]
+
+source_file="res://Roundabout.obj"
+dest_files=[ "res://.import/Roundabout.obj-c82c355cccb7bcf6d27dc7b9cecbcbcb.mesh", "res://.import/Roundabout.obj-c82c355cccb7bcf6d27dc7b9cecbcbcb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

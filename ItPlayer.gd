@@ -2,6 +2,7 @@ extends KinematicBody
 
 var moveSpeed = 10.0
 var vel = Vector3()
+var gravity = 15.0
 
 export var color = "#654234"
 
@@ -16,7 +17,7 @@ func _ready():
 
 func _physics_process(delta):
 	vel.x = 0
-	vel.y = 0
+	vel.z = 0
 	
 	var input = Vector3()
 	
@@ -34,7 +35,7 @@ func _physics_process(delta):
 	var dir = (transform.basis.z * input.z + transform.basis.x * input.x)
 	vel.x = dir.x * moveSpeed
 	vel.z = dir.z * moveSpeed
-	vel.y = 0
+	vel.y -= gravity * delta
 	
 	vel = move_and_slide(vel, Vector3.UP)
 	
