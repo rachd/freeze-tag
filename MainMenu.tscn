@@ -82,7 +82,7 @@ margin_right = 262.0
 margin_bottom = 19.0
 text = "Number of Players:"
 
-[node name="SpinBox" type="SpinBox" parent="HostPanel/VBoxContainer/HBoxContainer"]
+[node name="txtMaxPlayers" type="SpinBox" parent="HostPanel/VBoxContainer/HBoxContainer"]
 margin_left = 266.0
 margin_right = 340.0
 margin_bottom = 24.0
@@ -151,3 +151,4 @@ margin_bottom = 66.0
 size_flags_horizontal = 0
 text = "Join"
 [connection signal="pressed" from="HostPanel/VBoxContainer/CreateButton" to="." method="_on_CreateButton_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/JoinButton" to="." method="_on_JoinButton_pressed"]
