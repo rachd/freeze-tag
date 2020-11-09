@@ -13,3 +13,10 @@ func _on_player_list_changed():
 			var nlabel = Label.new()
 			nlabel.text = network.players[p].name
 			$playerList.add_child(nlabel)
+			
+remotesync func start_game():
+	get_tree().change_scene("res://MainScene.tscn")
+
+
+func _on_StartButton_pressed():
+	rpc("start_game")

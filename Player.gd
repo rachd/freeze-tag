@@ -5,10 +5,14 @@ signal on_unfreeze()
 
 var originalMoveSpeed = 10.0
 var moveSpeed = originalMoveSpeed
+var gravity = 15.0
 var vel = Vector3()
 var is_frozen = false
 
 var color = "#8BC1DE"
+
+puppet var puppet_vel = Vector3()
+
 
 onready var camera = get_node("Camera Orbit")
 
@@ -20,29 +24,32 @@ func _ready():
 	self.connect("on_unfreeze", get_node("/root/MainScene"), "_on_unfreeze")
 
 func _physics_process(delta):
-	vel.x = 0
-	vel.y = 0
+	if is_network_master():
+		vel.x = 0
+		vel.y = 0
 	
-	var input = Vector3()
+		var input = Vector3()
 	
-	if Input.is_action_pressed("move_forwards"):
-		input.z += 1
-	if Input.is_action_pressed("move_backwards"):
-		input.z -= 1
-	if Input.is_action_pressed("move_left"):
-		input.x += 1
-	if Input.is_action_pressed("move_right"):
-		input.x -= 1
+		if Input.is_action_pressed("move_forwards"):
+			input.z += 1
+		if Input.is_action_pressed("move_backwards"):
+			input.z -= 1
+		if Input.is_action_pressed("move_left"):
+			input.x += 1
+		if Input.is_action_pressed("move_right"):
+			input.x -= 1
 		
-	input = input.normalized()
+		input = input.normalized()
 	
-	var dir = (transform.basis.z * input.z + transform.basis.x * input.x)
-	vel.x = dir.x * moveSpeed
-	vel.z = dir.z * moveSpeed
-	vel.y = 0
+		var dir = (transform.basis.z * input.z + transform.basis.x * input.x)
+		vel.x = dir.x * moveSpeed
+		vel.z = dir.z * moveSpeed
+		vel.y -= gravity * delta
 	
-	vel = move_and_slide(vel, Vector3.UP)
-	
+		vel = move_and_slide(vel, Vector3.UP)
+	#	rset("puppet_vel", vel)
+	#else:
+	#	vel = move_and_slide(puppet_vel, Vector3.UP)
 
 func freeze():
 	if !is_frozen:

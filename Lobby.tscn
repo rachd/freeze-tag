@@ -35,3 +35,12 @@ __meta__ = {
 margin_top = 64.0
 margin_right = 1024.0
 margin_bottom = 64.0
+
+[node name="StartButton" type="Button" parent="."]
+margin_left = 470.0
+margin_top = 68.0
+margin_right = 553.0
+margin_bottom = 88.0
+size_flags_horizontal = 4
+text = "Start Game"
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
