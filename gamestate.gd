@@ -5,3 +5,5 @@ var player_info = {
 	net_id = 1,
 	actor_path = "res://Player.tscn"
 }
+
+var num_frozen = 0

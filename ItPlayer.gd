@@ -2,44 +2,58 @@ extends KinematicBody
 
 var moveSpeed = 10.0
 var vel = Vector3()
-var gravity = 15.0
+var gravity = 50.0
 
 var color = "#FFFF00"
 
-onready var camera = get_node("Camera Orbit")
+var camera_scene = preload("res://CameraOrbit.tscn")
+
+puppet var puppet_position = Vector3()
+
 onready var raycast = get_node("RayCast")
+
+func set_player_name(name):
+	$PlayerLabel.set_text(name)
 
 func _ready():
 	var material = $MeshInstance.get_surface_material(0)
 	material.albedo_color = color
 	$MeshInstance.set_surface_material(0, material)
 	
-
+func turn_on_camera():
+	var camera = camera_scene.instance()
+	add_child(camera)
+	
 func _physics_process(delta):
-	vel.x = 0
-	vel.z = 0
 	
-	var input = Vector3()
+	if is_network_master():
+		vel.x = 0
+		vel.y = 0
 	
-	if Input.is_action_pressed("move_forwards"):
-		input.z += 1
-	if Input.is_action_pressed("move_backwards"):
-		input.z -= 1
-	if Input.is_action_pressed("move_left"):
-		input.x += 1
-	if Input.is_action_pressed("move_right"):
-		input.x -= 1
+		var input = Vector3()
+	
+		if Input.is_action_pressed("move_forwards"):
+			input.z += 1
+		if Input.is_action_pressed("move_backwards"):
+			input.z -= 1
+		if Input.is_action_pressed("move_left"):
+			input.x += 1
+		if Input.is_action_pressed("move_right"):
+			input.x -= 1
 		
-	input = input.normalized()
+		input = input.normalized()
 	
-	var dir = (transform.basis.z * input.z + transform.basis.x * input.x)
-	vel.x = dir.x * moveSpeed
-	vel.z = dir.z * moveSpeed
-	vel.y -= gravity * delta
+		var dir = (transform.basis.z * input.z + transform.basis.x * input.x)
+		vel.x = dir.x * moveSpeed
+		vel.z = dir.z * moveSpeed
+		vel.y -= gravity * delta
 	
-	vel = move_and_slide(vel, Vector3.UP)
+		vel = move_and_slide(vel, Vector3.UP)
+		rset("puppet_position", transform)
+	else:
+		transform = puppet_position
 	
 func _process(delta):
 	if raycast.is_colliding():
 		if raycast.get_collider().has_method("freeze"):
-			raycast.get_collider().freeze()
+			raycast.get_collider().rpc("freeze", raycast.get_collider().name)

@@ -6,11 +6,11 @@ signal join_fail
 signal player_list_changed
 
 var server_info = {
-	name = "Server",
 	max_players = 0,
 	used_port = 0
 }
 var players = {}
+var player_order = {}
 
 func _on_player_connected(id):
 	pass
@@ -52,10 +52,8 @@ func join_server(ip, port):
 		print("Failed to create client")
 		emit_signal("join_fail")
 		return
-		
 	get_tree().set_network_peer(net)
-	emit_signal("server_created")
-	register_player(gamestate.player_info)
+
 	
 remote func register_player(pinfo):
 	if get_tree().is_network_server():

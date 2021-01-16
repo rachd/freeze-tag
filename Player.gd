@@ -5,25 +5,39 @@ signal on_unfreeze()
 
 var originalMoveSpeed = 10.0
 var moveSpeed = originalMoveSpeed
-var gravity = 15.0
+var gravity = 50.0
 var vel = Vector3()
 var is_frozen = false
 
-var color = "#8BC1DE"
+var unfrozen_color = "#8BC1DE"
+var frozen_color = "#251FCE"
 
-puppet var puppet_vel = Vector3()
+var camera_scene = preload("res://CameraOrbit.tscn")
 
+puppet var puppet_position = Vector3()
 
-onready var camera = get_node("Camera Orbit")
+func turn_on_camera():
+	var camera = camera_scene.instance()
+	add_child(camera)
 
+func set_player_name(name):
+	$PlayerLabel.set_text(name)
+	
 func _ready():
-	var material = $MeshInstance.get_surface_material(0)
-	material.albedo_color = color
-	$MeshInstance.set_surface_material(0, material)
+	change_color(unfrozen_color)
 	self.connect("on_freeze", get_node("/root/MainScene"), "_on_freeze")
 	self.connect("on_unfreeze", get_node("/root/MainScene"), "_on_unfreeze")
+	
+remotesync func change_color(color):
+	var material = SpatialMaterial.new()
+	material.albedo_color = color
+	$MeshInstance.set_material_override(material)
 
 func _physics_process(delta):
+	var pos = get_translation()
+	var cam = get_tree().get_root().get_camera()
+	var screenPos = cam.unproject_position(pos)
+	$NameLabel.set_position(Vector2(screenPos.x, screenPos.y - 2))
 	if is_network_master():
 		vel.x = 0
 		vel.y = 0
@@ -47,18 +61,23 @@ func _physics_process(delta):
 		vel.y -= gravity * delta
 	
 		vel = move_and_slide(vel, Vector3.UP)
-	#	rset("puppet_vel", vel)
-	#else:
-	#	vel = move_and_slide(puppet_vel, Vector3.UP)
+		for i in range(get_slide_count() - 1):
+			var collision = get_slide_collision(i)
+			if collision.collider.has_method("unfreeze"):
+				collision.collider.rpc("unfreeze")	
+		rset("puppet_position", transform)
+	else:
+		transform = puppet_position
+		
+remotesync func unfreeze():
+	moveSpeed = originalMoveSpeed
+	is_frozen = false
+	rpc("change_color", unfrozen_color)
+	emit_signal("on_unfreeze")
 
-func freeze():
-	if !is_frozen:
+remotesync func freeze(n):
+	if get_tree().get_network_unique_id() == int(n) and !is_frozen:
+		rpc("change_color", frozen_color)
 		moveSpeed = 0
 		is_frozen = true
 		emit_signal("on_freeze")
-
-func _on_Area_body_entered(body):
-	if body.name == "Player":
-		moveSpeed = originalMoveSpeed
-		is_frozen = false
-		emit_signal("on_unfreeze")
